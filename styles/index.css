@@ -153,6 +153,7 @@ body {
 .infobox .footnote-link {
     font-weight: normal !important; /* 기존에 들어가 있던 굵기를 강제로 해제 */
     text-decoration: none !important; /* 기본 밑줄 제거 */
+    color: #0275d8;
 }
 
 /* 마우스 호버 시에만 밑줄 표시 */
