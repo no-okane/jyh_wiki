@@ -1,0 +1,681 @@
+/* =========================================
+   1. 기본 초기화 및 폰트 설정
+   ========================================= */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f5f6f7;
+    margin: 0;
+    color: #333;
+}
+
+/* =========================================
+   2. 상단 헤더
+   ========================================= */
+.wiki-header {
+    background-color: #18ae83;
+    padding: 10px 20px;
+    display: flex;
+    /* justify-content: flex-end; 이 부분을 아래와 같이 변경 또는 삭제합니다 */
+    justify-content: flex-start; /* 로고 좌측 정렬 */
+    align-items: center;
+}
+
+.wiki-header .logo-img {
+    height: 35px;
+    display: block;
+    object-fit: contain;
+    
+    /* ★ 추가된 부분: 이미지를 완전히 흰색으로 바꿈 */
+    filter: brightness(0) invert(1);
+}
+
+/* =========================================
+   3. 메인 본문 컨테이너
+   ========================================= */
+.wiki-content {
+    max-width: 1000px;
+    width: 90%; 
+    margin: 20px auto;
+    background: white;
+    /* 위쪽 여백(padding-top)을 기존 40px에서 25px로 확 줄임 (위, 우, 아래, 좌 순서) */
+    padding: 25px 40px 40px 40px; 
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-sizing: border-box;
+}
+
+/* =========================================
+   4. 문서 제목 및 정보 영역
+   ========================================= */
+.document-title {
+    font-size: 2.2rem;
+    margin-top: 0; /* h1 태그 자체가 기본적으로 가지고 있는 위쪽 여백을 완전히 없앰 */
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.document-title a {
+    color: #333;
+    text-decoration: none;
+}
+
+.document-title a:hover {
+    text-decoration: underline;
+}
+
+.last-modified {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0; /* 분류 박스 쪽에서 간격을 줌 */
+}
+
+/* 수정 전: color가 #222로 더 진하게 설정되어 있었음 */
+.last-modified time {
+    color: #666; 
+    font-weight: normal; /* 굵기도 앞의 텍스트와 동일하게 기본 굵기로 변경 */
+}
+
+/* =========================================
+   5. 분류 박스 영역
+   ========================================= */
+.wiki-category {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 12px 18px;
+    margin-top: 15px; /* 최근 수정 시각과의 여백 */
+    margin-bottom: 20px;
+    background-color: #fff;
+    font-size: 1rem;
+    color: #333;
+    display: block;
+}
+
+.wiki-category a {
+    color: #0275d8;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.wiki-category a:hover {
+    text-decoration: underline;
+}
+
+.title-divider {
+    border: 0;
+    border-top: 2px solid #ccc;
+    margin-bottom: 20px;
+}
+
+/* =========================================
+   6. 우측 상단 정보표 (인포박스)
+   ========================================= */
+.infobox {
+    float: right;
+    width: 500px;
+    border: 1px solid #ccc;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+/* =========================================
+   인포박스 상단 타이틀 글자 크기 조정
+   ========================================= */
+.infobox-title {
+    text-align: center;
+    padding: 15px 10px; /* 상하좌우 여백 */
+    line-height: 1.3; /* 줄 간격 좁히기 */
+}
+
+/* 상단 직업/소속 */
+.infobox-title .info-top {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 5px; /* 이름과의 간격 */
+}
+
+/* 중앙 이름 (가장 크게) */
+.infobox-title .info-name {
+    font-size: 1.8rem; /* 이름 크기 (필요시 더 키우거나 줄이세요) */
+    font-weight: bold;
+    margin-bottom: 5px; /* 하단 영문과의 간격 */
+}
+
+/* 하단 한자/영문 */
+.infobox-title .info-bottom {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* 인포박스 안의 모든 링크와 각주 번호의 기본 굵기 제거 및 밑줄 없앰 */
+.infobox a,
+.infobox .footnote-link {
+    font-weight: normal !important; /* 기존에 들어가 있던 굵기를 강제로 해제 */
+    text-decoration: none !important; /* 기본 밑줄 제거 */
+}
+
+/* 마우스 호버 시에만 밑줄 표시 */
+.infobox a:hover,
+.infobox .footnote-link:hover {
+    text-decoration: underline !important; /* 호버 시 밑줄 생성 */
+}
+
+.infobox table { width: 100%; border-collapse: collapse; }
+.infobox th, .infobox td { border: 1px solid #ccc; padding: 10px; font-size: 0.9rem; }
+.infobox th { background-color: #666666; color: white; width: 30%; text-align: center; }
+.infobox .info-title { background-color: #666666; font-size: 1.2rem; padding: 15px; }
+.infobox .info-image { padding: 0; text-align: center; background: #fff; }
+
+/* 인포박스 내부 링크 아이콘 설정 */
+.infobox-link {
+    vertical-align: middle; /* 1. 이미지 하단의 불필요한 빈 공간 제거 및 수직 중앙 정렬 */
+    display: inline-block;
+    
+    /* (선택 사항) 만약 엑스(X) 로고가 너무 크거나 작다면 여기서 크기를 고정하세요 */
+    width: 24px; 
+    height: auto; 
+}
+
+/* 인포박스 펼치기/접기 버튼 */
+.infobox-toggle-row td {
+    text-align: center;
+    background-color:;
+    color: #555;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s;
+}
+.infobox-toggle-row td:hover { background-color: ; }
+
+/* =========================================
+   7. 인용문 (Quote) 스타일
+   ========================================= */
+.wiki-quote {
+    border: 1px dashed #ccc; /* 전체 점선 테두리 */
+    border-left: 4px solid #5cb85c; /* 좌측 초록색 굵은 선 (이미지와 유사한 톤) */
+    background-color: #f2f2f2; /* 연한 회색 배경 */
+    padding: 15px 20px;
+    margin: 15px 0;
+    color: #333;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    border-radius: 2px;
+}
+
+/* 인용문 본문 내용 */
+.quote-content {
+    margin-bottom: 12px;
+}
+
+/* 인용문 하단 출처 (구분선 포함) */
+.quote-source {
+    border-top: 1px solid #ccc; /* 텍스트와 출처 사이의 가로선 */
+    padding-top: 12px;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+/* =========================================
+   8. 목차 (Table of Contents)
+   ========================================= */
+.wiki-toc {
+    border: 1px solid #ccc;
+    background-color:;
+    display: inline-block;
+    
+    /* [요청 반영] 글씨에 딱 맞게 가로폭 설정 (최소 너비 제거) */
+    width: max-content; 
+    padding: 12px 20px;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.toc-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    
+    /* [요청 반영] 목차 바로 아래 가로선(hr) 및 여백 제거 */
+    border-bottom: none; 
+    padding-bottom: 0; 
+    margin-bottom: 10px; 
+    
+    cursor: pointer; 
+    user-select: none;
+    gap: 30px; /* 목차 텍스트와 우측 V 아이콘 사이의 간격 */
+}
+
+.toc-header h2 { margin: 0; font-size: 1.1rem; }
+
+/* 목차 V 아이콘 (접히면 회전) */
+.toc-icon { transition: transform 0.2s ease; }
+.toc-icon.collapsed { transform: rotate(90deg); } 
+
+.wiki-toc ul { list-style: none; padding-left: 10px; margin: 0; }
+.wiki-toc li { margin: 8px 0; }
+.wiki-toc .sub-toc { padding-left: 20px; font-size: 0.95rem; } 
+
+/* [요청 반영] 번호는 파란색, 글씨는 일반 폰트 색상, 호버 시 밑줄 제거 */
+.wiki-toc a { 
+    text-decoration: none; 
+}
+
+/* 마우스 호버 시에도 밑줄이 생기지 않도록 강제 적용 */
+.wiki-toc a:hover,
+.wiki-toc a:hover .toc-text { 
+    text-decoration: none; 
+}
+
+.wiki-toc .toc-num { 
+    color: #0275d8; 
+    font-weight: normal; 
+} /* 번호 부분 */
+
+.wiki-toc .toc-text { 
+    color: #333; 
+} /* 글자 부분 */
+
+/* =========================================
+   9. 본문 문단 및 제목 (h2, h3)
+   ========================================= */
+.wiki-section { margin-top: 40px; clear: both; }
+
+/* 공통 문단 제목 스타일 (클릭 가능) */
+.section-title { 
+    border-bottom: 1px solid #ccc; 
+    padding-bottom: 10px; 
+    color: #222; 
+    font-size: 1.6rem; 
+    display: flex; 
+    align-items: center; 
+    cursor: pointer; 
+    user-select: none; 
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.section-title:hover { background-color: #fcfcfc; }
+
+/* h3 하위 문단 스타일 (크기와 여백 조절) */
+h3.section-title.sub-title {
+    font-size: 1.35rem;
+    margin-top: 30px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+
+/* 제목 옆의 v 화살표 아이콘 */
+.section-toggle { 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin-right: 8px;
+    color: #555; 
+    transition: transform 0.3s ease, color 0.2s; 
+}
+
+/* 문단 번호 (1. 2.) 색상 */
+.wiki-section .toc-return { 
+    color: #0275d8; 
+    text-decoration: none; 
+    margin-right: 8px; 
+}
+
+/* [편집] 버튼 스타일 */
+.edit-btn { 
+    margin-left: auto; /* 우측 끝 정렬 */
+    font-size: 0.95rem; 
+    color: #0275d8; 
+    text-decoration: none; 
+    font-weight: normal; 
+    padding-left: 10px; 
+}
+.edit-btn:hover { text-decoration: underline; }
+
+/* --- [접힌 상태 (collapsed) 디자인 적용] --- */
+.section-title.collapsed .section-toggle { transform: rotate(-90deg); color: #aaa; }
+.section-title.collapsed .title-text { color: #999; }
+.section-title.collapsed .toc-return,
+.section-title.collapsed .edit-btn { color: #8ab6d6; }
+.section-title.collapsed { border-bottom: 1px solid #eee; }
+
+/* 링크 스타일 */
+.section-content a {
+    color: #0275d8;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 4px; /* 파란색 이름과 아래 설명 텍스트 사이의 틈 */
+}
+
+.section-content a:hover {
+    text-decoration: underline; /* 마우스 올리면 밑줄 */
+}
+
+/* =========================================
+   인물 관계 / 리스트 스타일 (말머리 기호 및 줄맞춤)
+   ========================================= */
+.wiki-list {
+    padding-left: 25px; /* 동그라미 기호가 들어갈 왼쪽 여백 */
+    margin: 15px 0; /* 위아래 여백 */
+}
+
+.wiki-list li {
+    list-style-type: disc; /* 꽉 찬 동그라미 기호 */
+    margin-bottom: 20px; /* 각 인물 항목 사이의 넉넉한 간격 */
+    line-height: 1.6; /* 텍스트 줄 간격 */
+    word-break: keep-all; /* 단어가 중간에 잘리지 않게 깔끔한 줄바꿈 */
+    color: #333;
+}
+
+/* 리스트 안의 파란색 이름 링크 스타일 */
+.wiki-list li a {
+    color: #0275d8;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 4px; /* 파란색 이름과 아래 설명 텍스트 사이의 틈 */
+}
+
+.wiki-list li a:hover {
+    text-decoration: underline; /* 마우스 올리면 밑줄 */
+}
+
+
+/* =========================================
+   본문 이미지 + 하단 캡션 박스 스타일
+   ========================================= */
+.wiki-image-box {
+    display: block;
+    margin: 20px auto; /* 화면 가운데 정렬 */
+    max-width: min(100%, 600px); /* 화면이 좁아지면 100%로 알아서 줄어듦 (반응형) */
+    border: 2px solid #bc0005; /* 전체를 감싸는 테두리 */
+    box-sizing: border-box;
+}
+
+/* 박스 안의 이미지 */
+.wiki-image-box img {
+    display: block;
+    width: 100%; /* 부모 박스(위의 max-width) 크기에 꽉 차게 맞춤 */
+    height: auto; 
+}
+
+/* 하단 캡션(설명) 영역 */
+.wiki-image-box .image-caption {
+    background-color: #bc0005; /* 하단 노란색/주황색 배경 */
+    color: #fff; /* 글씨 색상 (테두리와 동일한 보라색 계열) */
+    text-align: center; /* 글씨 가운데 정렬 */
+    padding: 10px; /* 글씨 상하좌우 여백 */
+    font-weight: bold; /* 글씨 굵게 */
+    font-size: 0.95rem;
+    border-top: 2px solid #fff; /* 이미지와 박스 사이의 가로선 */
+}
+
+
+/* =========================================
+   스포일러 경고 박스 스타일
+   ========================================= */
+.spoiler-box {
+    border: 1px solid #ccc;
+    border-top: 4px solid #ff9800; /* 상단 두꺼운 주황색 테두리 */
+    background-color: #fff;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    border-radius: 2px;
+}
+
+.spoiler-box .spoiler-title {
+    font-size: 1.1rem;
+    color: #222;
+    margin-bottom: 12px;
+}
+
+/* '스포일러' 파란색 링크 폰트 처리 */
+.spoiler-box .spoiler-title a {
+    color: #0275d8;
+    text-decoration: none;
+}
+
+.spoiler-box .spoiler-title a:hover {
+    text-decoration: underline;
+}
+
+.spoiler-box .spoiler-desc {
+    font-size: 0.95rem;
+    color: #333;
+}
+
+
+/* =========================================
+   10. 각주(주석) 및 모달 (팝업)
+   ========================================= */
+/* 본문 내 [1] 형태의 링크 */
+.footnote-link {
+    font-size: 0.8rem;
+    vertical-align: super;
+    color: #0275d8;
+    text-decoration: none;
+    position: relative;
+    cursor: pointer;
+    font-weight: bold;
+}
+.footnote-link:hover { text-decoration: underline; }
+
+/* 하단 각주 목록 영역 */
+.wiki-footnotes {
+    margin-top: 60px;
+    border-top: 2px solid #ccc;
+    padding-top: 20px;
+}
+.wiki-footnotes h3 { margin-top: 0; font-size: 1.2rem; }
+.wiki-footnotes ul { list-style: none; padding-left: 0; }
+.wiki-footnotes li { font-size: 0.95rem; margin-bottom: 8px; color: #333; }
+.wiki-footnotes a { color: #0275d8; text-decoration: none; font-weight: normal; margin-right: 5px; }
+
+/* =========================================
+   모바일 주석 모달 팝업 구조 (라이트 모드 적용)
+   ========================================= */
+.footnote-modal-overlay {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 팝업 밖의 배경은 어둡게 유지해서 팝업을 돋보이게 함 */
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.footnote-modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+.footnote-modal-content {
+    background-color: #fff; /* 하얀색 배경 (라이트 모드) */
+    color: #333; /* 어두운 글씨 */
+    width: 85%;
+    max-width: 320px;
+    border-radius: 6px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.footnote-modal-text { 
+    padding: 20px; 
+    font-size: 0.95rem; 
+    line-height: 1.6; 
+}
+.footnote-modal-text .fn-id { 
+    color: #0275d8; /* 위키 테마에 맞게 주석 번호를 파란색으로 변경 */
+    font-weight: normal; 
+    margin-right: 5px; 
+} 
+.footnote-modal-close {
+    background-color: #f8f9fa; /* 밝은 회색 닫기 버튼 */
+    color: #333;
+    border: none;
+    border-top: 1px solid #ddd; /* 연한 가로선 */
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+.footnote-modal-close:active { 
+    background-color: #e2e6ea; /* 터치했을 때 살짝 더 어두워지는 효과 */
+}
+
+
+/* =========================================
+   11. 플로팅 내비게이션 (목차, 위, 아래)
+   ========================================= */
+.floating-nav { 
+    position: fixed; 
+    bottom: 30px; 
+    right: 30px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
+    z-index: 100; 
+}
+
+.nav-btn { 
+    background-color: #fff; 
+    cursor: pointer; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width: 46px; 
+    height: 46px; 
+    padding: 0; 
+    transition: background-color 0.2s, box-shadow 0.2s; 
+}
+.nav-btn:hover { background-color: #f4f5f7; }
+.nav-btn.standalone { 
+    border: 1px solid #dfe1e5; 
+    border-radius: 12px; 
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08); 
+}
+
+.nav-group { 
+    display: flex; 
+    flex-direction: column; 
+    background-color: #fff; 
+    border: 1px solid #dfe1e5; 
+    border-radius: 12px; 
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08); 
+    overflow: hidden; 
+}
+.nav-group .group-item { border: none; background-color: transparent; }
+.nav-group .divider { height: 1px; background-color: #dfe1e5; width: 100%; }
+
+
+/* =========================================
+   12. 반응형 모바일 처리 (화면 768px 이하)
+   ========================================= */
+@media screen and (max-width: 768px) {
+    /* 1. 바깥 회색 배경을 완전히 흰색으로 변경 */
+    body {
+        background-color: #fff;
+    }
+
+    /* 2. 하얀색 본문 박스의 바깥 여백(margin)과 테두리를 없애서 화면에 꽉 차게 만듦 */
+    .wiki-content { 
+        width: 100%; 
+        margin: 0; 
+        padding: 20px 15px; /* 모바일용 안쪽 여백 조정 */
+        border: none; 
+        box-shadow: none; 
+    }
+    
+    /* 인포박스가 우측 고정이 아니라 상단 100%를 차지하게 됨 */
+    .infobox { 
+        float: none; 
+        width: 100%; 
+        margin-left: 0; 
+        margin-bottom: 20px; 
+    }
+    
+    /* 목차도 가로폭 제한을 풀고 자연스럽게 배치되도록 수정 */
+    .wiki-toc { 
+        display: inline-block; 
+        width: max-content; /* 글자 폭에 딱 맞춘 크기 유지 */
+        max-width: none; /* 브라우저가 좁아져도 억지로 줄이거나 늘리지 않음 */
+    }
+    
+    /* 플로팅 버튼 여백 축소 */
+    .floating-nav { 
+        bottom: 20px; 
+        right: 20px; 
+    }
+}
+
+
+/* =========================================
+   13. [스마트 툴팁] PC 마우스 호버 전용 디자인
+   ========================================= */
+.pc-tooltip {
+    position: fixed; /* 화면 기준 절대 좌표로 띄움 (잘림 방지) */
+    background-color: #fff;
+    color: #333;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    
+    /* 1. 너비 속성 변경 (max-content -> fit-content) */
+    width: fit-content;
+    max-width: 450px; /* 최대 너비 */
+    white-space: normal;
+    word-break: keep-all; 
+    
+    /* 2. 단어 줄바꿈 속성 변경 (keep-all 지우고 break-all 적용) */
+    word-break: break-all; /* 빈 공간이 없도록 글자를 꽉 채우고 넘치면 가차없이 자름 */
+    
+    font-size: 0.9rem;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    line-height: 1.6;
+}
+
+/* 툴팁이 활성화되었을 때 */
+.pc-tooltip.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 툴팁 아래쪽 꼬리(화살표) */
+.pc-tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: var(--arrow-pos, 50%); /* JS에서 꼬리 위치를 계산해서 넣어줌 */
+    transform: translateX(-50%);
+    border-width: 6px 6px 0 6px;
+    border-style: solid;
+    border-color: #ccc transparent transparent transparent;
+}
+.pc-tooltip::before {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: var(--arrow-pos, 50%);
+    transform: translateX(-50%);
+    border-width: 5px 5px 0 5px;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+    z-index: 1;
+}
+
+/* =========================================
+   [추가됨] 브라우저 창이 좁아졌을 때 툴팁 가로폭 축소
+   ========================================= */
+@media screen and (max-width: 768px) {
+    .pc-tooltip {
+        max-width: 240px; /* 창이 좁아졌을 때의 툴팁 최대 너비 (원하시는 수치로 조절 가능) */
+    }
+}
